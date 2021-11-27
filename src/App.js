@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { db, auth } from "./firebase-config";
+import { db, auth,storage } from "./firebase-config";
 import firebase from 'firebase';
 import index from './index.css';
 import { useAuthState } from 'react-firebase-hooks/auth'
-
 
 
 
@@ -24,6 +23,20 @@ function App() {
   const [newAge, setNewAge] = useState(0);
   const [users, setUsers] = useState([]);
   const [user] = useAuthState(auth)
+
+  const [image, setImage] = useState('');
+  const [url, setUrl] = useState('');
+  const upload = () => {
+    if (image == null)
+      return;
+    const task = storage.ref(`/images/${image.name}`).put(image)
+      .on("state_changed", alert("success"), alert,()=>{
+        storage.ref('images').child(image.name).getDownloadURL().then((url)=> {
+          setUrl(url);
+          console.log(url.toString());
+        })
+      });
+  }
 
   // const { uid, photoURL } = auth.currentUser;
 
@@ -78,6 +91,10 @@ function App() {
     });
   };
 
+
+
+
+
   //this will render as the screen loads 
   useEffect(() => {
     getUsers();
@@ -85,6 +102,13 @@ function App() {
 
   return (
     <>
+      <div >
+      <input type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
+      <button onClick={upload}>Upload</button>
+      {
+      <img className="imgdata"  alt="No Image" src={url==null ?'':url} alt="" />
+      }
+      </div>
       {
         user ? <div className="App">
           <input
@@ -115,9 +139,9 @@ function App() {
             return (
               <div>
                 {" "}
-              <p>
-                <img className="imgdata" src={user.photoURL} alt="" />
-              </p>
+                <p>
+                  <img className="imgdata" src={user.photoURL} alt="" />
+                </p>
                 <h1>Name: {user.name}</h1>
                 <h1>Age: {user.age}</h1>
                 <button
@@ -136,6 +160,7 @@ function App() {
                   {" "}
                   Delete User
                 </button>
+
               </div>
             );
           })}

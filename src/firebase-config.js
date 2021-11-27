@@ -14,8 +14,9 @@ const firebaseApp = firebase.initializeApp({
 
 const db = firebaseApp.firestore()
 const auth = firebase.auth()
+const storage = firebase.storage();
 
-export { db, auth }
+export { db, auth,storage }
 
 //new method
 // // Import the functions you need from the SDKs you need
