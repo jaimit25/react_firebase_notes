@@ -1,8 +1,9 @@
 //old method
 import firebase from 'firebase'
+// https://websitefirebase-ca9f3.firebaseio.com",
 
 const firebaseApp = firebase.initializeApp({
-https://websitefirebase-ca9f3.firebaseio.com",
+//add configs
 });
 
 const db = firebaseApp.firestore()
