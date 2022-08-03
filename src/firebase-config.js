@@ -2,14 +2,7 @@
 import firebase from 'firebase'
 
 const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyC9YV7mF9PcwYkCEyFyU6a-PdOl3HUWTPg",
-  authDomain: "websitefirebase-ca9f3.firebaseapp.com",
-  databaseURL: "https://websitefirebase-ca9f3.firebaseio.com",
-  projectId: "websitefirebase-ca9f3",
-  storageBucket: "websitefirebase-ca9f3.appspot.com",
-  messagingSenderId: "468542671800",
-  appId: "1:468542671800:web:70e3b62757d23cb248dd4d",
-  measurementId: "G-57PPQ18TQK"
+https://websitefirebase-ca9f3.firebaseio.com",
 });
 
 const db = firebaseApp.firestore()
